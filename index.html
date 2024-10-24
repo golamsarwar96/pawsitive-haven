@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adoption</title>
+    <!-- daisyUI and Tailwind CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lato Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/d0b11ec7af.js" crossorigin="anonymous"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primaryBlack: '#131313',
+                        btnColor: '#0E7A81',
+                    },
+                    fontFamily: {
+                        lato: 'lato',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-lato">
+    <header>
+        <!-- Nav section  -->
+        <nav class="w-11/12 mx-auto mt-2">
+            <div class="navbar bg-base-100">
+                <div class="navbar-start">
+                    <div class="dropdown">
+                        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+                        </div>
+                        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            <li><a class="text-zinc-500">Home</a></li>
+                            <li><a class="text-zinc-500">Shop</a></li>
+                            <li><a class="text-zinc-500">Contact</a></li>
+                        </ul>
+                    </div>
+                <div class="logo flex gap-2 items-center">
+                    <img src="./images/logo.webp" alt="pet adoption logo">
+                    <h1 class="text-sm md:text-xl font-bold text-primaryBlack">Pawsitive Haven</h1>
+                </div>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a class="text-base text-zinc-500">Home</a></li>
+                        <li><a class="text-base text-zinc-500">Shop</a></li>
+                        <li><a class="text-base text-zinc-500">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-end">
+                    <button class="btn btn-base rounded-full"><i class="fa-solid fa-user"></i></button>
+                </div>
+            </div>
+        </nav>
+        <!-- Banner Section -->
+        <section class="flex justify-center mt-10">
+            <div class="space-y-7 text-center">
+                <h5 class="text-zinc-600 text-xl font-bold">Bringing Families Together ❤️‍🔥</h5>
+                <h1 class="text-primaryBlack text-5xl md:text-6xl font-extrabold">Your Path to Adoption<br>Starts Here</h1>
+                <p class="text-primaryBlack w-11/12 mx-auto text-sm font-medium">Pawsitive Haven connects loving homes with adorable pets in need of adoption promoting compassion and companionship for
+                a brighter future.</p>
+                <div>
+                    <button class="btn btn-base bg-btnColor text-white px-8"><a href="#target">View More</a></button>
+                </div>
+                <div>
+                    <img src="./images/pet.webp" alt="">
+                </div>
+            </div>
+        </section>
+    </header>
+    <main class="w-11/12 mx-auto">
+        <!-- Best Friend Section -->
+         <div id="target" class="text-center mt-24 space-y-5">
+            <h1 class="text-primaryBlack text-3xl font-extrabold">Adopt Your Best Friend</h1>
+            <p class="text-primaryBlack text-sm font-medium">Get yourself a favorite buddy who will always there for
+            you.Below you can choose<br>from different categories.</p>
+         </div>
+         <!-- categories section -->
+          <section id="btn-section" class="mt-10 grid grid-cols-2 lg:grid-cols-4 justify-center gap-8 md:gap-10">
+            
+          </section>
+
+          <!-- sort section -->
+          <section class="flex flex-col md:flex-row justify-center items-center md:justify-between gap-3 md:gap-0 mt-16">
+            <div>
+                <h1 class="font-bold text-xl text-primaryBlack">Best Deal For You</h1>
+            </div>
+            <div>
+                <button id="sort-price" onclick="arrayToSort()" class=" btn btn-base bg-btnColor text-white">Sort By Price</button>
+            </div>
+          </section>
+
+        <!-- Spinner -->
+        <div class="flex justify-center">
+            <div class="loading loading-bars loading-lg" id="spinner"></div>
+        </div>
+          <!-- card section -->
+          <section class="flex flex-col md:flex-row items-center md:items-start gap-3">
+                <div id="card-container" class="mt-6 w-9/12 grid grid-cols-1 lg:grid-cols-3 gap-5">
+                
+                </div>
+                <div class="w-[90%] md:w-[25%] mt-6 border rounded-2xl">
+                    <div id="add-pet-container" class="grid grid-cols-2 p-2 gap-1">
+
+                    </div>
+                </div>
+          </section>
+
+        <!-- Open the modal using ID.showModal() method -->
+        <button class="btn hidden" onclick="customModal.showModal()">open modal</button>
+        <dialog id="customModal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <div id="modal-content">
+
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+            
+    <!-- adopt modal -->
+        <button class="btn hidden" onclick="customModal2.showModal()">open modal</button>
+        <dialog id="customModal2" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box space-y-2">
+                <div class="flex justify-center">
+                    <img src="./images/firework.png" alt="riajulislam">
+                </div>
+                <h3 class="text-2xl text-center font-bold">Congratulations</h3>
+                <div class="text-center text-5xl" id="timer">3</div>
+            </div>
+        </dialog>
+
+
+    </main>
+    <footer class="bg-primaryBlack p-20 mt-10">
+        <div class="flex justify-between items-center flex-col lg:flex-row gap-10 lg:gap-10">
+            <div class="space-y-4">
+                <div class="logo flex gap-2 items-center">
+                    <img src="./images/logo.webp" alt="pet adoption logo">
+                    <h1 class="text-sm md:text-xl font-bold text-white">Pawsitive Haven</h1>
+                </div>
+                <div>
+                    <p class="text-white text-sm">Location: av. Washington 165, NY CA 54003</p>
+                    <p class="text-white text-sm">Phone: +31 85 964 47 25</p>
+                    <p class="text-white text-sm">Email: info@yourdomain.com</p>
+                    <p class="text-white text-sm">Openings hours: 9.00 AM - 5.00 PM</p>
+                </div>
+                <div class="flex justify-start gap-6">
+                    <img class="w-10" src="./images/facebook.png" alt="">
+                    <img class="w-10" src="./images/twitter.png" alt="">
+                    <img class="w-10 bg-white" src="./images/youtube.png" alt="">
+                    <img class="w-10" src="./images/instagram.png" alt="">
+                </div>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-white text-xl font-bold">Useful links</h3>
+                <div class="text-gray-400 flex flex-col gap-2">
+                    <a href="">Home</a>
+                    <a href="">About Us</a>
+                    <a href="">Animal</a>
+                    <a href="">Foundation</a>
+                    <a href="">Contact Us</a>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-white text-xl font-bold">Drop a message</h3>
+                <input type="email" placeholder="Enter your email" class="input input-bordered w-full max-w-xs bg-[#ffffff0d] border-2" />
+                <button class="w-full btn bg-btnColor border-0 text-lg text-white">Subscribe</button>
+            </div>
+        </div>
+    </footer>
+    <script src="./js/app.js"></script>
+</body>
+</html>
